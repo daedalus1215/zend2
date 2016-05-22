@@ -9,6 +9,7 @@ return array(
     // This should be an array of module namespaces used in the application.
     'modules' => array(
         'Application',
+        'Album', //Larry - May 22 2016 - We now need to tell the ModuleManager that this new module exists. This is done in the application’s config/application.config.php file which is provided by the skeleton application. Update this file so that its modules section contains the Album module as well, so the file now looks like this:
     ),
 
     // These are various options for the listeners attached to the ModuleManager
