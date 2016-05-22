@@ -35,7 +35,10 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface
     
     return $config;
   }
-
+  /**
+   * This method simply loads the config/module.config.php file.
+   * @return type
+   */
   public function getConfig() 
   {
     return include __DIR__ . '/config/module.config.php';
