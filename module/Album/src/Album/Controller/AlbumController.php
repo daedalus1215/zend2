@@ -6,3 +6,26 @@
  * and open the template in the editor.
  */
 
+namespace Album\Controller;
+
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
+
+class AlbumController extends AlbumActionController
+{
+  public function indexAction()
+     {
+     }
+
+     public function addAction()
+     {
+     }
+
+     public function editAction()
+     {
+     }
+
+     public function deleteAction()
+     {
+     }
+}
