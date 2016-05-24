@@ -36,7 +36,8 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface
   {
     $config = array(
       'Zend\Loader\ClassMapAutoloader' => array(__DIR__ . '/autoload_classmap.php'),
-      'Zen\Loader\StandardAutoloader' => array('namespaces' => array(__NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__)
+      'Zend\Loader\StandardAutoloader' => array('namespaces' => array(__NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
+        ),
       ),
     );
     

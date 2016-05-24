@@ -11,7 +11,7 @@ namespace Album\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-class AlbumController extends AlbumActionController
+class AlbumController extends AbstractActionController
 {
   protected $albumTable;
   
