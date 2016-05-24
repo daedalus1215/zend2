@@ -27,11 +27,17 @@ class AlbumController extends AlbumActionController
   
   /* 
    * In order to list the albums, we need to retrieve them from the model and
-   *  pass them to the view. To do this, we fill in indexAction() within 
+   * pass them to the view. To do this, we fill in indexAction() within 
    * AlbumController. Update the AlbumController’s indexAction() like this: 
    */
   public function indexAction()
   {
+    // With Zend Framework 2, in order to set variables in the view, we return 
+    // a ViewModel instance where the first parameter of the constructor is an 
+    // array from the action containing data we need. These are then automatically 
+    // passed to the view script. The ViewModel object also allows us to change 
+    // the view script that is used, but the default is to use 
+    // {controller name}/{action name}. We can now fill in the index.phtml view script:
     return new ViewModel(array(
       'albums' => $this->getAlbumTable()->fetchAll(),
     ));
