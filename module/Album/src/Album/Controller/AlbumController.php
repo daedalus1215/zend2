@@ -13,19 +13,35 @@ use Zend\View\Model\ViewModel;
 
 class AlbumController extends AlbumActionController
 {
+  protected $albumTable;
+  
+  public function getAlbumTable()
+  {
+    if (!$this->albumTable) {
+      $sm = $this->getServiceLocator();
+      $this->albumTable = $sm->get('Album\Model\AlbumTable');
+    }
+    
+    return $this->albumTable;
+  }
+  
   public function indexAction()
-     {
-     }
+  {
 
-     public function addAction()
-     {
-     }
+  }
 
-     public function editAction()
-     {
-     }
+  public function addAction()
+  {
+    
+  }
 
-     public function deleteAction()
-     {
-     }
+  public function editAction()
+  {
+    
+  }
+
+  public function deleteAction()
+  {
+    
+  }
 }
