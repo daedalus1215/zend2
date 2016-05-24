@@ -25,9 +25,16 @@ class AlbumController extends AlbumActionController
     return $this->albumTable;
   }
   
+  /* 
+   * In order to list the albums, we need to retrieve them from the model and
+   *  pass them to the view. To do this, we fill in indexAction() within 
+   * AlbumController. Update the AlbumController’s indexAction() like this: 
+   */
   public function indexAction()
   {
-
+    return new ViewModel(array(
+      'albums' => $this->getAlbumTable()->fetchAll(),
+    ));
   }
 
   public function addAction()
