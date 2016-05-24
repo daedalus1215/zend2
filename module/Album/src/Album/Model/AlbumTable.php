@@ -58,7 +58,7 @@ class AlbumTable
   public function deleteAlbum($id) 
   {
     $this->tableGateway->delete(array('id' => (int) $id));
-  }
-  
-  
+  }  
 }
+
+// In order to always use the same instance of our AlbumTable, we will use the ServiceManager
