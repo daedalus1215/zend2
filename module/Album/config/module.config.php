@@ -32,7 +32,7 @@ return array (
             'action' => '[a-zA-Z][a-zA-Z0-9_-]*', // The constraints section allows us to ensure that the characters within a segment are as expected, so we have limited actions to starting with a letter and then subsequent characters only being alphanumeric, underscore or hyphen.
             'id'     => '[0-9]+', // We also limit the id to a number.
           ),
-          'default' => array(
+          'defaults' => array(
             'controller' => 'Album\Controller\Album',
             'action'     => 'index',
           ),
