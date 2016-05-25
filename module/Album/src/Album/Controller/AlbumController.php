@@ -18,6 +18,7 @@ class AlbumController extends AbstractActionController
 {
   protected $albumTable;
   
+  
   public function getAlbumTable()
   {
     if (!$this->albumTable) {
@@ -46,6 +47,7 @@ class AlbumController extends AbstractActionController
     ));
   }
 
+  
   public function addAction()
   {
     $form = new AlbumForm();
@@ -68,11 +70,55 @@ class AlbumController extends AbstractActionController
     return array('form' => $form);
   }
 
+  
   public function editAction()
   {
+    // We use it to retrieve the id from the route we created in the modules’ module.config.php.
+    $id = (int) $this->params()->fromRoute('id', 0); 
+    if (!$id) { // if 0
+        return $this->redirect()->toRoute('album', array(
+            'action' => 'add'
+            ));
+    }
     
+    // Get the Album with the specified id. An exception is thrown if it cannot be found, in which case go to the index page.
+    try {
+        $album = $this->getAlbumTable()->getAlbum($id);
+    } catch (\Exception $ex) {
+        return $this->redirect()->toRoute('album', array(
+            'action' => 'index'
+            ));
+    }
+    
+    $form = new AlbumForm();
+    $form->bind($album); // bind() attaches the model to the form. This is used in two ways:
+    // 1. When displaying the form, the initial values for each element are extracted from the model.
+    
+    $form->get('submit')->setAttribute('value', 'Edit');
+    
+    $request = $this->getRequest();
+    if ($request->isPost()) {
+        $form->setInputFilter($album->getInputFilter());
+        $form->setData($request->getPost());
+        
+        // 2. After successful validation in isValid(), the data from the form is put back into the model.
+        // To utilize the saveAlbum we need to use the hydrator object - by implementing getArrayCopy() in the Album class.
+        if ($form->isValid()) {
+            // As a result of using bind() with its hydrator, we do not need to populate the form’s data back into the $album as that’s already been done, so we can just call the mappers’ saveAlbum() to store the changes back to the database.
+            $this->getAlbumTable()->saveAlbum($album);
+            
+            // Redirect to list of albums
+            $this->redirect()->toRoute('album');
+        }
+    }
+    
+    return array(
+        'id' => $id,
+        'form' => $form,
+    );
   }
 
+  
   public function deleteAction()
   {
     

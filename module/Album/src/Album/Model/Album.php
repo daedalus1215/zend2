@@ -1,5 +1,4 @@
-  <?php
-
+<?php
 namespace Album\Model;
 
 use Zend\InputFilter\InputFilter;
@@ -23,9 +22,9 @@ class Album implements InputFilterAwareInterface
    */
   public function exchangeArray($data) 
   {
-    $this->id     = (!empty($data['id'])) ? $data['id'] : null;
-    $this->artist = (!empty($data['artist'])) ? $data['artist'] : null;
-    $this->title  = (!empty($data['title'])) ? $data['title'] : null;
+    $this->id     = (isset($data['id'])) ? $data['id'] : null;
+    $this->artist = (isset($data['artist'])) ? $data['artist'] : null;
+    $this->title  = (isset($data['title'])) ? $data['title'] : null;
   }
 
   public function getInputFilter() 
@@ -65,7 +64,7 @@ class Album implements InputFilterAwareInterface
         'name' => 'title',
         'required' => true,
         'filters' => array(
-          array('name' => 'StringTags'),
+          array('name' => 'StripTags'),
           array('name' => 'StringTrim'),
         ),
         'validators' => array(
@@ -89,4 +88,10 @@ class Album implements InputFilterAwareInterface
   {
     throw new \Exception("Not used, please dont instantiate");
   } 
+  
+  // As a result of using bind() with its hydrator, we do not need to populate the form’s data back into the $album as that’s already been done, so we can just call the mappers’ saveAlbum() to store the changes back to the database.  
+  public function getArrayCopy()
+  {
+      return get_object_vars($this);
+  }  
 }
