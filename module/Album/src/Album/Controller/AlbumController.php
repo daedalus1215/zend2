@@ -137,12 +137,12 @@ class AlbumController extends AbstractActionController
         
         // Redirect to list of albums
         return $this->redirect()->toRoute('album');
-        
+    }
         
         return array(
             'id'    => $id,
             'album' => $this->getAlbumTable()->getAlbum($id)
         );
-    }
+    
   }
 }
