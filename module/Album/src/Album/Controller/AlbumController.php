@@ -52,11 +52,20 @@ class AlbumController extends AbstractActionController
     $form->get('submit')->setValue('Add');
     
     $request = $this->getRequest();
-    if ($request->isPost()) {
+    if ($request->isPost()) { // if true we know that the form has been submitted and so we set the form's input filter from an album instance.
       $album = new Album();
       $form->setInputFilter($album->getInputFilter());
       $form->setData($request->getPost());
+      
+      if ($form->isValid()) {
+          $album->exchangeArray($form->getData());
+          $this->getAlbumTable()->saveAlbum($album);
+          
+          // Redirect to list of albums
+          $this->redirect()->toRoute('album');
+      }
     }
+    return array('form' => $form);
   }
 
   public function editAction()

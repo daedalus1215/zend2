@@ -51,12 +51,12 @@ class AlbumTable
       'title' => $album->title,
     );
     
-    $id = (int) $album->id;
+    $id = (int) $album->id; // $id will equal to 0 if there is not already a id (a new album entry).
     if ($id == 0) {
-      $this->tableGateway->insert($data);
+      $this->tableGateway->insert($data); // since there is no album with that id lets insert a new row (b/c this is a new Album).
     } else {
       if ($this->getAlbum($id)) {
-        $this->tableGateway->update($data, array('id' => $id));
+        $this->tableGateway->update($data, array('id' => $id)); // we got the album, this is an update so we do SQL update where id = $id
       } else {
         throw new \Exception('Album id does not exist.');
       }
