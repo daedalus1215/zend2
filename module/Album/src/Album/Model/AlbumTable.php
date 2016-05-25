@@ -3,6 +3,14 @@
 namespace Album\Model;
 
 use Zend\Db\TableGateway\TableGateway;
+/**
+ * We can see that this AlbumTable is a class that takes a dependency 
+ * injection of a TableGateway.
+ * 
+ * TabelGateway is nothing more than a database wrapper, like a ORM, that will
+ * remove the ugly raw SQL statements and allow us to interact with an object.
+ */
+
 
 class AlbumTable 
 {
@@ -28,7 +36,7 @@ class AlbumTable
   public function getAlbum($id) 
   {
     $id = (int) $id;
-    $rowset = $this->tableGateway->select(array('id' => $id));
+    $rowset = $this->tableGateway->select(array('id' => $id)); // This is essentially a where statement like: SELECT * FROM Album WHERE `id` = '$id';
     $row = $rowset->current();
     if (!$row) {
       throw new \Exception("Could not find row with $id");
