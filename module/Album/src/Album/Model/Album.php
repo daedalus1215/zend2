@@ -30,6 +30,7 @@ class Album implements InputFilterAwareInterface
 
   public function getInputFilter() 
   {
+    // We add one input for each property that we wish to filter or validate. 
     if (!$this->inputFilter) {
       $inputFilter = new InputFilter();
       
