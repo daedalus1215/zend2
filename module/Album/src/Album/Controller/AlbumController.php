@@ -73,7 +73,9 @@ class AlbumController extends AbstractActionController
   
   public function editAction()
   {
+      $stop = "d";
     // We use it to retrieve the id from the route we created in the modules’ module.config.php.
+      $test = $this->params()->fromRoute();
     $id = (int) $this->params()->fromRoute('id', 0); 
     if (!$id) { // if 0
         return $this->redirect()->toRoute('album', array(
